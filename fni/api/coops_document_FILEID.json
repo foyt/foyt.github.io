@@ -1,0 +1,71 @@
+{
+  "apiVersion" : "1",
+  "swaggerVersion" : "1.2",
+  "basePath" : "http://www.forgeandillusion/rest/",
+  "resourcePath" : "/coops/document/{FILEID}",
+  "apis" : [ {
+    "path" : "/coops/document/{FILEID}",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "load",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "string",
+        "paramType" : "path",
+        "name" : "FILEID",
+        "required" : true
+      }, {
+        "type" : "integer",
+        "format" : "int64",
+        "paramType" : "query",
+        "name" : "revisionNumber"
+      } ]
+    } ]
+  }, {
+    "path" : "/coops/document/{FILEID}/join",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "join",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "string",
+        "paramType" : "path",
+        "name" : "FILEID",
+        "required" : true
+      }, {
+        "type" : "array",
+        "items" : {
+          "type" : "string"
+        },
+        "paramType" : "query",
+        "name" : "algorithm"
+      }, {
+        "type" : "string",
+        "paramType" : "query",
+        "name" : "protocolVersion"
+      } ]
+    } ]
+  }, {
+    "path" : "/coops/document/{FILEID}/update",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "update",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "string",
+        "paramType" : "path",
+        "name" : "FILEID",
+        "required" : true
+      }, {
+        "type" : "string",
+        "paramType" : "query",
+        "name" : "sessionId"
+      }, {
+        "type" : "integer",
+        "format" : "int64",
+        "paramType" : "query",
+        "name" : "revisionNumber"
+      } ]
+    } ]
+  } ]
+}

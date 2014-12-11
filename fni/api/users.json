@@ -1,0 +1,14 @@
+{
+  "apiVersion" : "1",
+  "swaggerVersion" : "1.2",
+  "basePath" : "http://www.forgeandillusion/rest/",
+  "resourcePath" : "/users",
+  "apis" : [ {
+    "path" : "/users/me/info",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "getOwnInfo",
+      "type" : "Response"
+    } ]
+  } ]
+}

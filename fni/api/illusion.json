@@ -4,108 +4,194 @@
   "basePath" : "http://www.forgeandillusion/rest/",
   "resourcePath" : "/illusion",
   "apis" : [ {
-    "path" : "/illusion/events/{EVENTID}/groups",
+    "path" : "/illusion/events",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "createEvent",
+      "type" : "IllusionEvent",
+      "parameters" : [ {
+        "type" : "IllusionEvent",
+        "description" : "payload",
+        "paramType" : "body",
+        "name" : "entity",
+        "required" : true
+      } ],
+      "summary" : "Creates new event"
+    } ]
+  }, {
+    "path" : "/illusion/events/{EVENTID}",
     "operations" : [ {
       "method" : "GET",
-      "nickname" : "listEventGroups",
+      "nickname" : "getEvent",
+      "type" : "IllusionEvent",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int64",
+        "description" : "event id",
+        "paramType" : "path",
+        "name" : "EVENTID",
+        "required" : true
+      } ],
+      "summary" : "Returns an event"
+    }, {
+      "method" : "PUT",
+      "nickname" : "updateEvent",
       "type" : "Response",
       "parameters" : [ {
         "type" : "integer",
         "format" : "int64",
+        "description" : "event id",
         "paramType" : "path",
         "name" : "EVENTID",
         "required" : true
-      } ]
+      }, {
+        "type" : "IllusionEvent",
+        "description" : "payload",
+        "paramType" : "body",
+        "name" : "entity",
+        "required" : true
+      } ],
+      "summary" : "Updates an event"
+    }, {
+      "method" : "DELETE",
+      "nickname" : "deleteEvent",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int64",
+        "description" : "event id",
+        "paramType" : "path",
+        "name" : "EVENTID",
+        "required" : true
+      } ],
+      "summary" : "Deletes an event"
+    } ]
+  }, {
+    "path" : "/illusion/events/{EVENTID}/groups",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "listEventGroups",
+      "type" : "array",
+      "items" : {
+        "$ref" : "IllusionEventGroup"
+      },
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int64",
+        "description" : "event id",
+        "paramType" : "path",
+        "name" : "EVENTID",
+        "required" : true
+      } ],
+      "summary" : "Returns list of event groups"
     } ]
   }, {
     "path" : "/illusion/events/{EVENTID}/materials/{MATERIALID}/participantSettings/{PARTICIPANTID}",
     "operations" : [ {
       "method" : "POST",
       "nickname" : "createMaterialSetting",
-      "type" : "Response",
+      "type" : "IllusionEventMaterialParticipantSetting",
       "parameters" : [ {
         "type" : "integer",
         "format" : "int64",
+        "description" : "event's is",
         "paramType" : "path",
         "name" : "EVENTID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "material's id",
         "paramType" : "path",
         "name" : "MATERIALID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "participant's id",
         "paramType" : "path",
         "name" : "PARTICIPANTID",
         "required" : true
       }, {
         "type" : "IllusionEventMaterialParticipantSetting",
+        "description" : "payload",
         "paramType" : "body",
         "name" : "entity",
         "required" : true
-      } ]
+      } ],
+      "summary" : "Creates event's material participant setting"
     }, {
       "method" : "GET",
       "nickname" : "listMaterialSettings",
-      "type" : "Response",
+      "type" : "array",
+      "items" : {
+        "$ref" : "IllusionEventGroup"
+      },
       "parameters" : [ {
         "type" : "integer",
         "format" : "int64",
+        "description" : "event's is",
         "paramType" : "path",
         "name" : "EVENTID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "material's id",
         "paramType" : "path",
         "name" : "MATERIALID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "participant's id",
         "paramType" : "path",
         "name" : "PARTICIPANTID",
         "required" : true
       }, {
         "type" : "string",
+        "description" : "return only by key",
         "paramType" : "query",
         "name" : "key"
-      } ]
+      } ],
+      "summary" : "Lists event's material participant settings"
     } ]
   }, {
     "path" : "/illusion/events/{EVENTID}/materials/{MATERIALID}/participantSettings/{PARTICIPANTID}/{ID}",
     "operations" : [ {
       "method" : "GET",
       "nickname" : "getMaterialSetting",
-      "type" : "Response",
+      "type" : "IllusionEventMaterialParticipantSetting",
       "parameters" : [ {
         "type" : "integer",
         "format" : "int64",
+        "description" : "event's is",
         "paramType" : "path",
         "name" : "EVENTID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "material's id",
         "paramType" : "path",
         "name" : "MATERIALID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "participant's id",
         "paramType" : "path",
         "name" : "PARTICIPANTID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "participant setting id",
         "paramType" : "path",
         "name" : "ID",
         "required" : true
-      } ]
+      } ],
+      "summary" : "Finds event's material participant setting"
     }, {
       "method" : "PUT",
       "nickname" : "updateMaterialSetting",
@@ -113,33 +199,39 @@
       "parameters" : [ {
         "type" : "integer",
         "format" : "int64",
+        "description" : "event's is",
         "paramType" : "path",
         "name" : "EVENTID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "material's id",
         "paramType" : "path",
         "name" : "MATERIALID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "participant's id",
         "paramType" : "path",
         "name" : "PARTICIPANTID",
         "required" : true
       }, {
         "type" : "integer",
         "format" : "int64",
+        "description" : "setting id",
         "paramType" : "path",
         "name" : "ID",
         "required" : true
       }, {
         "type" : "IllusionEventMaterialParticipantSetting",
+        "description" : "payload",
         "paramType" : "body",
         "name" : "entity",
         "required" : true
-      } ]
+      } ],
+      "summary" : "Updates event's material participant setting"
     } ]
   }, {
     "path" : "/illusion/events/{EVENTID}/pages/{PAGEID}",
@@ -150,6 +242,52 @@
       "parameters" : [ {
         "type" : "integer",
         "format" : "int64",
+        "description" : "event id",
+        "paramType" : "path",
+        "name" : "EVENTID",
+        "required" : true
+      }, {
+        "type" : "integer",
+        "format" : "int64",
+        "description" : "page id",
+        "paramType" : "path",
+        "name" : "PAGEID",
+        "required" : true
+      } ],
+      "summary" : "Deletes an event page"
+    } ]
+  }, {
+    "path" : "/illusion/events/{EVENTID}/participants",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "createEventParticipant",
+      "type" : "IllusionEventParticipant",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int64",
+        "description" : "event id",
+        "paramType" : "path",
+        "name" : "EVENTID",
+        "required" : true
+      }, {
+        "type" : "IllusionEventParticipant",
+        "description" : "payload",
+        "paramType" : "body",
+        "name" : "entity",
+        "required" : true
+      } ],
+      "summary" : "Creates an event participant"
+    } ]
+  }, {
+    "path" : "/illusion/events/{EVENTID}/participants/{ID}",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "getEventParticipant",
+      "type" : "IllusionEventParticipant",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int64",
+        "description" : "event id",
         "paramType" : "path",
         "name" : "EVENTID",
         "required" : true
@@ -157,27 +295,75 @@
         "type" : "integer",
         "format" : "int64",
         "paramType" : "path",
-        "name" : "PAGEID",
+        "name" : "ID",
         "required" : true
-      } ]
+      } ],
+      "summary" : "Retrieves an event participant"
+    }, {
+      "method" : "PUT",
+      "nickname" : "updateEventParticipant",
+      "type" : "IllusionEventParticipant",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int64",
+        "description" : "event id",
+        "paramType" : "path",
+        "name" : "EVENTID",
+        "required" : true
+      }, {
+        "type" : "integer",
+        "format" : "int64",
+        "paramType" : "path",
+        "name" : "ID",
+        "required" : true
+      }, {
+        "type" : "IllusionEventParticipant",
+        "description" : "payload",
+        "paramType" : "body",
+        "name" : "entity",
+        "required" : true
+      } ],
+      "summary" : "Updates an event participant"
+    }, {
+      "method" : "DELETE",
+      "nickname" : "deleteEventParticipant",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int64",
+        "description" : "event id",
+        "paramType" : "path",
+        "name" : "EVENTID",
+        "required" : true
+      }, {
+        "type" : "integer",
+        "format" : "int64",
+        "paramType" : "path",
+        "name" : "ID",
+        "required" : true
+      } ],
+      "summary" : "Deletes an event participant"
     } ]
   }, {
     "path" : "/illusion/events/{EVENTURLNAME}/groups",
     "operations" : [ {
       "method" : "POST",
       "nickname" : "createGroup",
-      "type" : "Response",
+      "type" : "IllusionEventGroup",
       "parameters" : [ {
         "type" : "string",
+        "description" : "event's urlname",
         "paramType" : "path",
         "name" : "EVENTURLNAME",
         "required" : true
       }, {
         "type" : "IllusionEventGroup",
+        "description" : "payload",
         "paramType" : "body",
         "name" : "entity",
         "required" : true
-      } ]
+      } ],
+      "summary" : "Creates an event group"
     } ]
   } ],
   "models" : {
@@ -194,6 +380,120 @@
         "key" : {
           "type" : "string",
           "enum" : [ "CHARACTER_SHEET_DATA", "WEBSOCKET_KEY" ]
+        }
+      }
+    },
+    "IllusionEvent" : {
+      "id" : "IllusionEvent",
+      "properties" : {
+        "genreIds" : {
+          "type" : "array",
+          "description" : "List of genre ids",
+          "items" : {
+            "type" : "integer"
+          }
+        },
+        "signUpFee" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "event's sign-up fee"
+        },
+        "imageUrl" : {
+          "type" : "string",
+          "description" : "a URL into event's image"
+        },
+        "location" : {
+          "type" : "string",
+          "description" : "event's location"
+        },
+        "signUpFeeCurrency" : {
+          "type" : "string",
+          "description" : "event's sign-up fee currency in ISO 4217 format"
+        },
+        "signUpEndDate" : {
+          "type" : "string",
+          "description" : "event's sign-up end date in ISO 8601 format"
+        },
+        "signUpStartDate" : {
+          "type" : "string",
+          "description" : "event's sign-up start date in ISO 8601 format"
+        },
+        "urlName" : {
+          "type" : "string",
+          "description" : "event's URL name"
+        },
+        "xmppRoom" : {
+          "type" : "string",
+          "description" : "event's XMPP group chat room"
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "event's id"
+        },
+        "start" : {
+          "type" : "string",
+          "description" : "event's start time in ISO 8601 format"
+        },
+        "created" : {
+          "type" : "string",
+          "description" : "event's creation time in ISO 8601 format"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "event's description"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "event's name"
+        },
+        "ageLimit" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "event's age limit"
+        },
+        "domain" : {
+          "type" : "string",
+          "description" : "event's custom domain or null when event is not bound to custom domain"
+        },
+        "joinMode" : {
+          "type" : "string",
+          "description" : "event's join mode",
+          "enum" : [ "OPEN", "APPROVE", "INVITE_ONLY" ]
+        },
+        "beginnerFriendly" : {
+          "type" : "boolean",
+          "description" : "whether event is beginner friendly"
+        },
+        "typeId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "id of the event's type"
+        },
+        "end" : {
+          "type" : "string",
+          "description" : "event's end time in ISO 8601 format"
+        }
+      },
+      "required" : [ "name", "joinMode", "beginnerFriendly", "typeId" ]
+    },
+    "IllusionEventParticipant" : {
+      "id" : "IllusionEventParticipant",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "event participant id"
+        },
+        "userId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "event participant' user id"
+        },
+        "role" : {
+          "type" : "string",
+          "description" : "event participant role",
+          "enum" : [ "INVITED", "ORGANIZER", "PARTICIPANT", "BOT", "BANNED", "PENDING_APPROVAL", "WAITING_PAYMENT" ]
         }
       }
     },

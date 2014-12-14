@@ -9,6 +9,7 @@
       "method" : "GET",
       "nickname" : "getPing",
       "type" : "Response",
+      "summary" : "Returns pong",
       "produces" : [ "text/plain" ]
     } ]
   } ]

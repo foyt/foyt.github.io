@@ -1,13 +1,13 @@
 {
   "swaggerVersion" : "1.2",
   "apiVersion" : "1",
-  "basePath" : "http://http://foyt.github.io/fni/api",
+  "basePath" : "http://foyt.github.io/fni/api/",
   "apis" : [ {
     "path" : "/system.{format}"
   }, {
-    "path" : "/coops_document_FILEID.{format}"
-  }, {
     "path" : "/users.{format}"
+  }, {
+    "path" : "/coops.{format}"
   }, {
     "path" : "/illusion.{format}"
   } ]

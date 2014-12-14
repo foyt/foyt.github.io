@@ -8,7 +8,52 @@
     "operations" : [ {
       "method" : "GET",
       "nickname" : "getOwnInfo",
-      "type" : "Response"
+      "type" : "UserInfo",
+      "summary" : "Returns logged user info"
     } ]
-  } ]
+  }, {
+    "path" : "/users/users",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "listUsers",
+      "type" : "array",
+      "items" : {
+        "$ref" : "UserInfo"
+      },
+      "parameters" : [ {
+        "type" : "string",
+        "description" : "filter responses by email",
+        "paramType" : "query",
+        "name" : "email"
+      } ],
+      "summary" : "Lists users"
+    } ]
+  } ],
+  "models" : {
+    "UserInfo" : {
+      "id" : "UserInfo",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "user id"
+        },
+        "lastName" : {
+          "type" : "string",
+          "description" : "user's last name"
+        },
+        "emails" : {
+          "type" : "array",
+          "description" : "user's email addresses",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "firstName" : {
+          "type" : "string",
+          "description" : "user's first name"
+        }
+      }
+    }
+  }
 }

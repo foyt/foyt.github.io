@@ -17,9 +17,17 @@
         "required" : true
       } ],
       "summary" : "Creates new event"
+    }, {
+      "method" : "GET",
+      "nickname" : "listEvents",
+      "type" : "array",
+      "items" : {
+        "$ref" : "IllusionEvent"
+      },
+      "summary" : "Lists events"
     } ]
   }, {
-    "path" : "/illusion/events/{EVENTID}",
+    "path" : "/illusion/events/{EVENTID:[0-9]*}",
     "operations" : [ {
       "method" : "GET",
       "nickname" : "getEvent",
@@ -67,7 +75,7 @@
       "summary" : "Deletes an event"
     } ]
   }, {
-    "path" : "/illusion/events/{EVENTID}/groups",
+    "path" : "/illusion/events/{EVENTID:[0-9]*}/groups",
     "operations" : [ {
       "method" : "GET",
       "nickname" : "listEventGroups",
@@ -86,7 +94,7 @@
       "summary" : "Returns list of event groups"
     } ]
   }, {
-    "path" : "/illusion/events/{EVENTID}/materials/{MATERIALID}/participantSettings/{PARTICIPANTID}",
+    "path" : "/illusion/events/{EVENTID:[0-9]*}/materials/{MATERIALID:[0-9]*}/participantSettings/{PARTICIPANTID:[0-9]*}",
     "operations" : [ {
       "method" : "POST",
       "nickname" : "createMaterialSetting",
@@ -157,7 +165,7 @@
       "summary" : "Lists event's material participant settings"
     } ]
   }, {
-    "path" : "/illusion/events/{EVENTID}/materials/{MATERIALID}/participantSettings/{PARTICIPANTID}/{ID}",
+    "path" : "/illusion/events/{EVENTID:[0-9]*}/materials/{MATERIALID:[0-9]*}/participantSettings/{PARTICIPANTID:[0-9]*}/{ID:[0-9]*}",
     "operations" : [ {
       "method" : "GET",
       "nickname" : "getMaterialSetting",
@@ -234,7 +242,7 @@
       "summary" : "Updates event's material participant setting"
     } ]
   }, {
-    "path" : "/illusion/events/{EVENTID}/pages/{PAGEID}",
+    "path" : "/illusion/events/{EVENTID:[0-9]*}/pages/{PAGEID:[0-9]*}",
     "operations" : [ {
       "method" : "DELETE",
       "nickname" : "deletePage",
@@ -257,7 +265,7 @@
       "summary" : "Deletes an event page"
     } ]
   }, {
-    "path" : "/illusion/events/{EVENTID}/participants",
+    "path" : "/illusion/events/{EVENTID:[0-9]*}/participants",
     "operations" : [ {
       "method" : "POST",
       "nickname" : "createEventParticipant",
@@ -279,7 +287,7 @@
       "summary" : "Creates an event participant"
     } ]
   }, {
-    "path" : "/illusion/events/{EVENTID}/participants/{ID}",
+    "path" : "/illusion/events/{EVENTID:[0-9]*}/participants/{ID:[0-9]*}",
     "operations" : [ {
       "method" : "GET",
       "nickname" : "getEventParticipant",
@@ -464,6 +472,10 @@
         "beginnerFriendly" : {
           "type" : "boolean",
           "description" : "whether event is beginner friendly"
+        },
+        "published" : {
+          "type" : "boolean",
+          "description" : "whether event is public or not"
         },
         "typeId" : {
           "type" : "integer",

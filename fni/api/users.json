@@ -4,21 +4,37 @@
   "basePath" : "http://www.forgeandillusion/rest/",
   "resourcePath" : "/users",
   "apis" : [ {
-    "path" : "/users/me/info",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "getOwnInfo",
-      "type" : "UserInfo",
-      "summary" : "Returns logged user info"
-    } ]
-  }, {
     "path" : "/users/users",
     "operations" : [ {
+      "method" : "POST",
+      "nickname" : "createUser",
+      "type" : "User",
+      "parameters" : [ {
+        "type" : "User",
+        "description" : "payload",
+        "paramType" : "body",
+        "name" : "entity",
+        "required" : true
+      }, {
+        "type" : "boolean",
+        "description" : "whether to generate credentials for new user (defaults to true)",
+        "defaultValue" : "TRUE",
+        "paramType" : "query",
+        "name" : "generateCredentials"
+      }, {
+        "type" : "boolean",
+        "description" : "whether to send generated credentials to user via email (defaults to true)",
+        "defaultValue" : "TRUE",
+        "paramType" : "query",
+        "name" : "sendCredentials"
+      } ],
+      "summary" : "Creates new user"
+    }, {
       "method" : "GET",
       "nickname" : "listUsers",
       "type" : "array",
       "items" : {
-        "$ref" : "UserInfo"
+        "$ref" : "User"
       },
       "parameters" : [ {
         "type" : "string",
@@ -28,23 +44,40 @@
       } ],
       "summary" : "Lists users"
     } ]
+  }, {
+    "path" : "/users/users/me",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "getOwnInfo",
+      "type" : "User",
+      "summary" : "Returns logged user info"
+    } ]
   } ],
   "models" : {
-    "UserInfo" : {
-      "id" : "UserInfo",
+    "User" : {
+      "id" : "User",
       "properties" : {
         "id" : {
           "type" : "integer",
           "format" : "int64",
-          "description" : "user id"
+          "description" : "user id (ignored when creating or updating user)"
         },
         "lastName" : {
           "type" : "string",
           "description" : "user's last name"
         },
+        "nickname" : {
+          "type" : "string",
+          "description" : "user's nickname"
+        },
+        "locale" : {
+          "type" : "string",
+          "description" : "user's locale (language part) in ISO 639 alpha-2 format",
+          "defaultValue" : "en"
+        },
         "emails" : {
           "type" : "array",
-          "description" : "user's email addresses",
+          "description" : "user's emails",
           "items" : {
             "type" : "string"
           }
@@ -53,7 +86,8 @@
           "type" : "string",
           "description" : "user's first name"
         }
-      }
+      },
+      "required" : [ "id", "emails" ]
     }
   }
 }

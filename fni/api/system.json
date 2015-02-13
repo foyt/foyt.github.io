@@ -4,6 +4,14 @@
   "basePath" : "http://www.forgeandillusion/rest/",
   "resourcePath" : "/system",
   "apis" : [ {
+    "path" : "/system/jpa/cache/flush",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "flushCaches",
+      "type" : "Response",
+      "produces" : [ "text/plain" ]
+    } ]
+  }, {
     "path" : "/system/ping",
     "operations" : [ {
       "method" : "GET",
